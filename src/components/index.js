@@ -1,3 +1,3 @@
-import Header from "./Header";
-import ProtectedRoute from "./ProtectedRoute";
+import Header from "./Header/Header";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 export { Header, ProtectedRoute };

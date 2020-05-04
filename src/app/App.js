@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import { Home, NotFound, Profile } from "./views";
-import { Header, ProtectedRoute } from "./components";
+import { Home, NotFound, Profile } from "../views";
+import { Header, ProtectedRoute } from "../components";
 
 function App() {
    return (
