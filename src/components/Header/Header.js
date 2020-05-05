@@ -1,7 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
-import { IconButton, Menu, MenuItem, Toolbar, Typography } from "@material-ui/core";
+import { IconButton, Menu, MenuItem, Toolbar, Typography, makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useHistory } from "react-router-dom";
