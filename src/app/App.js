@@ -17,7 +17,7 @@ function App() {
          <CssBaseline />
          <div className={classes.root}>
             <Header />
-            <SideDrower></SideDrower>
+            <SideDrower />
             <Content>
                <Switch>
                   <Route exact path="/" component={Home} />
