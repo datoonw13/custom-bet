@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
          duration: theme.transitions.duration.enteringScreen,
       }),
       marginLeft: 0,
+      [theme.breakpoints.down("sm")]: {
+         marginLeft: -drawerWidth,
+      },
    },
    drawerHeader: {
       padding: theme.spacing(0, 1),

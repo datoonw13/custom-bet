@@ -115,6 +115,9 @@ const useStyles = makeStyles((theme) => ({
    },
    appBarShift: {
       width: `calc(100% - ${drawerWidth}px)`,
+      [theme.breakpoints.down("sm")]: {
+         width: "100%",
+      },
       marginLeft: drawerWidth,
       transition: theme.transitions.create(["margin", "width"], {
          easing: theme.transitions.easing.easeOut,
