@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { drawerWidth } from "../../services/UIConstants";
 import clsx from "clsx";
-import { AppBar, IconButton, Menu, MenuItem, Toolbar, Typography, makeStyles } from "@material-ui/core";
+import { AppBar, IconButton, Button, Menu, MenuItem, Toolbar, Typography, makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { toggleSideDrower } from "../../store/ducks/main";
@@ -11,7 +11,7 @@ import { toggleSideDrower } from "../../store/ducks/main";
 function Header(props) {
    const history = useHistory();
    const classes = useStyles();
-   const [auth, setAuth] = React.useState(true);
+   const [auth, setAuth] = React.useState(false);
    const [anchorEl, setAnchorEl] = React.useState(null);
    const open = Boolean(anchorEl);
 
@@ -53,7 +53,7 @@ function Header(props) {
             <Typography variant="h6" className={classes.title}>
                Custom Bet
             </Typography>
-            {auth && (
+            {auth ? (
                <div>
                   <IconButton
                      aria-label="account of current user"
@@ -82,6 +82,11 @@ function Header(props) {
                      <MenuItem onClick={navigateProfile}>Profile</MenuItem>
                      <MenuItem onClick={handleLogOut}>Log out</MenuItem>
                   </Menu>
+               </div>
+            ) : (
+               <div>
+                  <Button color="inherit">Sign in</Button>
+                  <Button color="inherit">Get started</Button>
                </div>
             )}
          </Toolbar>
