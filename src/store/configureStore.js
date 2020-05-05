@@ -7,14 +7,13 @@ import { RESET_STORE } from "./ducks/main";
 const sagaMiddleware = createSagaMiddleware();
 
 const appReducer = combineReducers({
-   mainReducer
+   mainReducer,
 });
 
 const rootReducer = (state, action) => {
    if (action.type === RESET_STORE) {
       state = undefined;
    }
-
    return appReducer(state, action);
 };
 
@@ -23,7 +22,9 @@ export default function configureStore(preloadedState) {
    const middlewareEnhancer = applyMiddleware(...middlewares);
 
    const enhancers = [middlewareEnhancer];
-   const composedEnhancers = compose(...enhancers);
+   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+   const composedEnhancers = composeEnhancers(...enhancers);
 
    const store = createStore(rootReducer, preloadedState, composedEnhancers);
 
