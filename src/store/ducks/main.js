@@ -1,21 +1,23 @@
-const TOGGLE_BURGER_DRAWER = "custom-bet/main/toggleBurgerDrower";
+const TOGGLE_SIDE_DRAWER = "custom-bet/main/toggleSideDrower";
 export const RESET_STORE = "custom-bet/main/resetStore";
 
 const initialState = {
-   burgerDrawerIsVisible: false,
+   sideDrawerIsVisible: false,
 };
 
 export default (state = initialState, action) => {
    switch (action.type) {
-      case TOGGLE_BURGER_DRAWER:
-         return { ...state, burgerDrawerIsVisible: action.payload };
+      case TOGGLE_SIDE_DRAWER:
+         return action.payload === undefined
+            ? { ...state, sideDrawerIsVisible: !state.sideDrawerIsVisible }
+            : { ...state, sideDrawerIsVisible: action.payload };
       default:
          return state;
    }
 };
 
-export const toggleBurgerDrower = (visible) => ({
-   type: TOGGLE_BURGER_DRAWER,
+export const toggleSideDrower = (visible) => ({
+   type: TOGGLE_SIDE_DRAWER,
    payload: visible,
 });
 

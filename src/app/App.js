@@ -2,21 +2,38 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Home, NotFound, Profile } from "../views";
-import { Header, ProtectedRoute } from "../components";
+import { ProtectedRoute } from "../components";
+import Header from "./Header/Header";
+import SideDrower from "./SideDrower/SideDrower";
+import { makeStyles, CssBaseline } from "@material-ui/core";
+import Content from "./Content/Content";
 
 function App() {
+   const classes = useStyles();
    return (
       <Router>
-         <Header />
-         <Switch>
-            <Route exact path="/" component={Home} />
-            <ProtectedRoute path="/profile">
-               <Profile />
-            </ProtectedRoute>
-            <Route path="*" component={NotFound} />
-         </Switch>
+         <CssBaseline />
+         <div className={classes.root}>
+            <Header />
+            <SideDrower></SideDrower>
+            <Content>
+               <Switch>
+                  <Route exact path="/" component={Home} />
+                  <ProtectedRoute path="/profile">
+                     <Profile />
+                  </ProtectedRoute>
+                  <Route path="*" component={NotFound} />
+               </Switch>
+            </Content>
+         </div>
       </Router>
    );
 }
 
 export default App;
+
+const useStyles = makeStyles((theme) => ({
+   root: {
+      display: "flex",
+   },
+}));
