@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { AppBar, IconButton, Button, Menu, MenuItem, Toolbar, Typography, makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import { toggleSideDrower, toggleSignIn, toggleSignUp } from "../../store/ducks/main";
+import { toggleSideDrower, toggleSignIn } from "../../store/ducks/main";
 
 function Header(props) {
    const history = useHistory();
