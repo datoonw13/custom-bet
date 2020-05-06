@@ -7,8 +7,7 @@ import Header from "./Header/Header";
 import SideDrower from "./SideDrower/SideDrower";
 import { makeStyles, CssBaseline } from "@material-ui/core";
 import Content from "./Content/Content";
-import SignIn from "./SignIn/SignIn";
-import SignUp from "./SignUp/SignUp";
+import Auth from "./Auth/Auth";
 
 function App() {
    const classes = useStyles();
@@ -27,8 +26,7 @@ function App() {
                   <Route path="*" component={NotFound} />
                </Switch>
             </Content>
-            <SignIn />
-            <SignUp />
+            <Auth />
          </div>
       </Router>
    );

@@ -7,19 +7,25 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { connect } from "react-redux";
+import { toggleSignIn, toggleSignUp } from "../../store/ducks/main";
+import { IconButton } from "@material-ui/core";
+import { Cancel } from "@material-ui/icons";
 
-function SignUp() {
+function SignUp(props) {
    const classes = useStyles();
 
    return (
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" className={classes.container}>
          <CssBaseline />
          <div className={classes.paper}>
+            <IconButton color="inherit" aria-label="close" edge="start" className={classes.cancel} onClick={props.closeSignUp}>
+               <Cancel />
+            </IconButton>
             <Avatar className={classes.avatar}>
                <LockOutlinedIcon />
             </Avatar>
@@ -86,7 +92,7 @@ function SignUp() {
                </Button>
                <Grid container justify="flex-end">
                   <Grid item>
-                     <Link href="#" variant="body2">
+                     <Link href="#" variant="body2" onClick={props.openSignIn}>
                         Already have an account? Sign in
                      </Link>
                   </Grid>
@@ -97,17 +103,30 @@ function SignUp() {
    );
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => {
+   return {
+      openSignIn: () => dispatch(toggleSignIn(true)),
+      closeSignUp: () => dispatch(toggleSignUp(false)),
+   };
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);
 
 const useStyles = makeStyles((theme) => ({
    paper: {
-      marginTop: theme.spacing(8),
+      marginBottom: theme.spacing(3),
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
    },
+   cancel: {
+      alignSelf: "flex-end",
+      marginRight: theme.spacing(-2),
+      // [theme.breakpoints.down("sm")]: {
+      //    marginTop: theme.spacing(2),
+      // },
+   },
    avatar: {
-      margin: theme.spacing(1),
       backgroundColor: theme.palette.secondary.main,
    },
    form: {

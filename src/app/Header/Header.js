@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { AppBar, IconButton, Button, Menu, MenuItem, Toolbar, Typography, makeStyles } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import { toggleSideDrower } from "../../store/ducks/main";
+import { toggleSideDrower, toggleSignIn, toggleSignUp } from "../../store/ducks/main";
 
 function Header(props) {
    const history = useHistory();
@@ -84,10 +84,9 @@ function Header(props) {
                   </Menu>
                </div>
             ) : (
-               <div>
-                  <Button color="inherit">Sign in</Button>
-                  <Button color="inherit">Get started</Button>
-               </div>
+               <Button color="inherit" onClick={props.openSignIn}>
+                  Sign in
+               </Button>
             )}
          </Toolbar>
       </AppBar>
@@ -98,6 +97,7 @@ const mapStateToProps = (state) => ({ drawerIsOpen: state.mainReducer.sideDrawer
 const mapDispatchToProps = (dispatch) => {
    return {
       openDrawer: () => dispatch(toggleSideDrower(true)),
+      openSignIn: () => dispatch(toggleSignIn(true)),
    };
 };
 
