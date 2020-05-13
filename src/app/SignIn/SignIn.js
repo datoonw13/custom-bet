@@ -15,10 +15,17 @@ import { connect } from "react-redux";
 import { toggleSignUp, toggleSignIn } from "../../store/ducks/main";
 import { IconButton } from "@material-ui/core";
 import { Cancel } from "@material-ui/icons";
+import { useForm } from "react-hook-form";
 
 function SignIn(props) {
    const classes = useStyles();
+   const { register, errors, formState } = useForm({
+      mode: "onBlur",
+      reValidateMode: "onChange",
+      defaultValues: { email: "", password: "" },
+   });
 
+   console.log(errors.email, errors.password);
    return (
       <Container component="main" maxWidth="xs" className={classes.container}>
          <CssBaseline />
@@ -32,31 +39,40 @@ function SignIn(props) {
             <Typography component="h1" variant="h5">
                Sign in
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form}>
                <TextField
                   variant="outlined"
                   margin="normal"
-                  required
                   fullWidth
-                  id="email"
                   label="Email Address"
                   name="email"
+                  required
                   autoComplete="email"
                   autoFocus
+                  inputRef={register({ pattern: /^\w+[\w-.]*@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/, required: true })}
+                  error={!!errors.email}
                />
                <TextField
                   variant="outlined"
                   margin="normal"
-                  required
                   fullWidth
                   name="password"
                   label="Password"
                   type="password"
-                  id="password"
+                  required
                   autoComplete="current-password"
+                  inputRef={register({ required: true })}
+                  error={!!errors.password}
                />
                <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-               <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+               <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  disabled={!formState.isValid}
+               >
                   Sign In
                </Button>
                <Grid container>

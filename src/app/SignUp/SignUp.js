@@ -15,9 +15,15 @@ import { connect } from "react-redux";
 import { toggleSignIn, toggleSignUp } from "../../store/ducks/main";
 import { IconButton } from "@material-ui/core";
 import { Cancel } from "@material-ui/icons";
+import { useForm } from "react-hook-form";
 
 function SignUp(props) {
    const classes = useStyles();
+   const { register, errors, formState } = useForm({
+      mode: "onBlur",
+      reValidateMode: "onChange",
+      defaultValues: { email: "", password: "", firstName: "", lastName: "" },
+   });
 
    return (
       <Container component="main" maxWidth="xs" className={classes.container}>
@@ -41,9 +47,10 @@ function SignUp(props) {
                         variant="outlined"
                         required
                         fullWidth
-                        id="firstName"
                         label="First Name"
                         autoFocus
+                        inputRef={register({ required: true })}
+                        error={!!errors.firstName}
                      />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -51,10 +58,11 @@ function SignUp(props) {
                         variant="outlined"
                         required
                         fullWidth
-                        id="lastName"
                         label="Last Name"
                         name="lastName"
                         autoComplete="lname"
+                        inputRef={register({ required: true })}
+                        error={!!errors.lastName}
                      />
                   </Grid>
                   <Grid item xs={12}>
@@ -66,6 +74,8 @@ function SignUp(props) {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
+                        inputRef={register({ pattern: /^\w+[\w-.]*@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/, required: true })}
+                        error={!!errors.email}
                      />
                   </Grid>
                   <Grid item xs={12}>
@@ -78,6 +88,9 @@ function SignUp(props) {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        inputRef={register({ required: true })}
+                        error={!!errors.password}
+                        helperText="password must contein ..."
                      />
                   </Grid>
                   <Grid item xs={12}>
@@ -87,7 +100,14 @@ function SignUp(props) {
                      />
                   </Grid>
                </Grid>
-               <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+               <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  disabled={!formState.isValid}
+               >
                   Sign Up
                </Button>
                <Grid container justify="flex-end">
